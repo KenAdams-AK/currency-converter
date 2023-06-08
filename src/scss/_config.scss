@@ -21,6 +21,8 @@ body {
   font-size: 0.875rem;
   color: $color-dark;
   @include background-light;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 body.dark {

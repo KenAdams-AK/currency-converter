@@ -7,5 +7,5 @@ type Props = {
 export default function Main(props: Props) {
   const { children } = props;
 
-  return <main className="Main">{children}</main>;
+  return <main className="Page">{children}</main>;
 }

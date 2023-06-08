@@ -1,0 +1,26 @@
+.About {
+  min-height: 100%;
+  padding: 0 0.5rem;
+
+  &__title {
+    padding: 1rem;
+  }
+}
+
+.desc {
+  p {
+    margin-bottom: 0.5rem;
+  }
+
+  & > p {
+    text-indent: 1rem;
+  }
+
+  &__features {
+    padding-left: 1rem;
+
+    p > span {
+      font-weight: 500;
+    }
+  }
+}
