@@ -1,16 +1,5 @@
-$color-white: hsla(0, 0%, 100%, 1);
-$color-black: hsla(0, 0%, 0%, 1);
-$color-black-primary: hsla(207, 72%, 11%, 1);
-$color-grey: hsla(218, 12%, 49%, 1);
-$color-grey-primary: hsla(240, 2%, 57%, 1);
-$color-grey-light: rgb(242, 242, 247);
-$color-red-primary: rgb(233, 33, 33);
-$color-green-primary: hsl(120, 39%, 54%);
-$color-blue-primary: hsl(208, 97%, 47%);
-$color-blue-secondary: hsl(225, 71%, 38%);
-
-$box-shadow-card: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12),
-  0px 2px 4px rgba(0, 0, 0, 0.14);
+$color-dark: hsl(207, 71%, 11%);
+$color-light: hsl(240, 24%, 96%);
 
 @mixin background-light {
   background: #70e1f5; /* fallback for old browsers */
@@ -30,14 +19,14 @@ $box-shadow-card: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12
 body {
   font-family: "Roboto", sans-serif;
   font-size: 0.875rem;
-  color: $color-black-primary;
+  color: $color-dark;
   @include background-light;
 }
 
 body.dark {
   font-family: "Roboto", sans-serif;
   font-size: 0.875rem;
-  color: $color-grey-light;
+  color: $color-light;
   @include background-dark;
 }
 

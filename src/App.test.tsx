@@ -5,7 +5,10 @@ import App from "./App";
 describe("App component", () => {
   test("renders correctly", () => {
     render(<App />);
-    const mainContainer = screen.getByRole("heading");
-    expect(mainContainer).toHaveTextContent("Hello World");
+    const header = screen.getByRole("banner");
+    const footer = screen.getByRole("contentinfo");
+
+    expect(header).toBeInTheDocument();
+    expect(footer).toBeInTheDocument();
   });
 });
