@@ -7,13 +7,17 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+
     "lint": "eslint src --ignore-path .gitignore . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint --ignore-path .gitignore --fix .",
+
     "prettier": "prettier --ignore-path .gitignore --list-different \"**/*.{ts,tsx,css,scss}\"",
     "prettier:write": "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,css,scss}\"",
+
     "test": "vitest",
     "test:no-watch": "vitest --watch=false",
     "coverage": "vitest run --coverage",
+
     "prepare": "husky install"
   },
   "dependencies": {
@@ -54,5 +58,13 @@
     "typescript": "^5.0.2",
     "vite": "^4.3.9",
     "vitest": "^0.32.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,css,scss}": [
+      "prettier --ignore-path .gitignore --write \"**/*.{ts,tsx,css,scss}\""
+    ],
+    "*.{ts,tsx}": [
+      "eslint --ignore-path .gitignore ."
+    ]
   }
 }
