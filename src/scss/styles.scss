@@ -1,2 +1,17 @@
 @import "reset";
+@import "shared";
 @import "config";
+
+@import "./modules/App.scss";
+
+@import "./modules/Header.scss";
+@import "./modules/Main.scss";
+@import "./modules/Footer.scss";
+
+@import "./modules/NavBar.scss";
+
+@import "./modules/Logo.scss";
+@import "./modules/ThemeButton.scss";
+@import "./modules/LoaderFallback.scss";
+
+@import "./modules/ErrorBoundary.scss";

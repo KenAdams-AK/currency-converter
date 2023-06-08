@@ -1,13 +1,10 @@
-import { useTheme } from "../../hooks/useThemeContext";
-
-import "./ThemeButton.scss";
+import { useTheme } from "../hooks/useThemeContext";
 
 export default function ThemeButton() {
   const { toggleTheme } = useTheme();
 
   return (
     <div className="ThemeButton">
-      <span className="ThemeButton__label">Toggle Theme</span>
       <button type="button" className="ThemeButton__button" onClick={toggleTheme}>
         <svg width="100%" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 496">
           <path

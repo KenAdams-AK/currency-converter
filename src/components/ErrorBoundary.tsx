@@ -1,7 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from "react";
 
-import "./ErrorBoundary.scss";
-
 type Props = {
   children: ReactNode;
 };
@@ -18,7 +16,7 @@ class ErrorBoundary extends Component<Props, State> {
     };
   }
 
-  static getDerivedStateFromError(_: Error): State {
+  static getDerivedStateFromError(_error: Error): State {
     return {
       hasError: true,
     };
