@@ -1,0 +1,17 @@
+@import "../../scss/styles.scss";
+
+.ThemeButton {
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  gap: 0.625rem;
+
+  &__button {
+    width: 30px;
+    height: 30px;
+    border: 2px solid currentColor;
+    background: transparent;
+    border-radius: 5px;
+    padding: 4px;
+  }
+}
