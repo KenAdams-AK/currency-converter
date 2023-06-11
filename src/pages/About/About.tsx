@@ -1,6 +1,8 @@
+import Main from "../../layout/Main";
+
 export default function About() {
   return (
-    <section className="About">
+    <Main pageName="About">
       <h1 className="About__title">Currency Converter</h1>
 
       <div className="About__desc desc" data-testid="description">
@@ -66,6 +68,6 @@ export default function About() {
           in different currencies.
         </p>
       </div>
-    </section>
+    </Main>
   );
 }

@@ -2,10 +2,11 @@ import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
+  pageName: string;
 };
 
 export default function Main(props: Props) {
-  const { children } = props;
+  const { children, pageName } = props;
 
-  return <main className="Page">{children}</main>;
+  return <main className={pageName}>{children}</main>;
 }

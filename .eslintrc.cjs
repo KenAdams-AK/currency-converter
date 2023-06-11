@@ -23,7 +23,7 @@ module.exports = {
   rules: {
     "react-refresh/only-export-components": ["warn"],
 
-    indent: ["error", 2],
+    indent: ["error", 2, { SwitchCase: 1 }],
     "linebreak-style": ["error", "windows"],
     quotes: ["error", "double"],
     semi: ["error", "always"],
@@ -38,5 +38,6 @@ module.exports = {
     "import/no-extraneous-dependencies": ["off"],
     "no-shadow": ["off"],
     "import/extensions": ["warn"],
+    "no-param-reassign": ["error", { props: false }],
   },
 };

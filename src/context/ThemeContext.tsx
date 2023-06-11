@@ -1,7 +1,7 @@
 import { ReactNode, createContext, useLayoutEffect, useMemo } from "react";
 
-import { useLocalStorage } from "../hooks/useLocalStorage.ts";
-import { TIME_TO_LIVE } from "../constants/TTL.ts";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { TTL } from "../constants/TimeToLive";
 
 type Props = {
   children: ReactNode;
@@ -17,7 +17,7 @@ export const ThemeContext = createContext({} as ThemeContextType);
 export function ThemeProvider(props: Props) {
   const { children } = props;
   const body = document.querySelector("body");
-  const [darkTheme, setDarkTheme] = useLocalStorage("dark-theme", false, TIME_TO_LIVE.darkTheme);
+  const [darkTheme, setDarkTheme] = useLocalStorage("dark-theme", false, TTL.darkTheme);
 
   useLayoutEffect(() => {
     if (body && darkTheme) {

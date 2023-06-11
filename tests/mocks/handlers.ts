@@ -3,9 +3,9 @@ import { mockedCurrency } from "./data";
 
 import { apiRouts } from "../../src/routes/apiRouts";
 
-export const GET_CURRENCY_URL = apiRouts.GET_CURRENCY_URL.slice(
+export const GET_CURRENCY_URL = apiRouts.GET_RATES_URL.slice(
   0,
-  apiRouts.GET_CURRENCY_URL.indexOf("?"),
+  apiRouts.GET_RATES_URL.indexOf("?"),
 );
 
 export const handlers = [

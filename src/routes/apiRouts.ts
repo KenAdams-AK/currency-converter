@@ -1,5 +1,7 @@
-const API_KEY = import.meta.env.VITE_API_KEY;
+const BASE_URL = "https://api.exchangerate.host";
 
 export const apiRouts = {
-  GET_CURRENCY_URL: `https://api.exchangeratesapi.io/v1/latest?access_key=${API_KEY}`,
+  FETCH_CURRENCY_SYMBOLS: `${BASE_URL}/symbols`,
+  GET_LATEST_RATES: `${BASE_URL}/latest`,
+  GET_CONVERT_CURRENCY: `${BASE_URL}/convert`,
 } as const;
