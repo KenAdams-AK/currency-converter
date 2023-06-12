@@ -71,7 +71,7 @@ export default function SelectCurrency(props: Props) {
   }, [isSwitching]);
 
   return (
-    <label htmlFor={currencyType}>
+    <label className="SelectCurrency__label" htmlFor={currencyType}>
       Select currency:
       <select
         className="SelectCurrency__select"

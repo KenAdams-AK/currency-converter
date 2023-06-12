@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Rates } from "../models/latestRates";
 
 type Props = {
@@ -7,19 +8,21 @@ type Props = {
 export default function RatesTable(props: Props) {
   const { rates } = props;
 
+  const ratesList = useMemo(() => Object.entries(rates), [rates]);
+
   return (
-    <table className="RatesTable">
-      <tbody>
-        <tr>
-          <th>Rates</th>
-        </tr>
-        {Object.entries(rates).map((rate) => (
-          <tr key={rate[0]}>
-            <td>{rate[0]}</td>
-            <td>{rate[1]}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className="RatesTable">
+      <table className="RatesTable__table">
+        <tbody>
+          {ratesList.length > 0 &&
+            ratesList.map((rate) => (
+              <tr key={rate[0]}>
+                <td>{rate[0]}</td>
+                <td>{rate[1]}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

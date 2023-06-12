@@ -5,5 +5,9 @@ type Props = {
 export default function ResultContainer(props: Props) {
   const { result } = props;
 
-  return <h2 className="ResultContainer">{result}</h2>;
+  return (
+    <div className="ResultContainer">
+      <span>{result}</span>
+    </div>
+  );
 }

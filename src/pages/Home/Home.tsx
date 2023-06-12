@@ -43,9 +43,11 @@ export default function Home() {
 
       <AmountInput amountType="convertAmount" initialAmount="100" />
 
-      <SelectCurrency currencyType="currencyFrom" initialCurrency="EUR" />
-      <Button content="Switch" onClick={handleSwitch} />
-      <SelectCurrency currencyType="currencyTo" initialCurrency="UAH" />
+      <div className="Home__select">
+        <SelectCurrency currencyType="currencyFrom" initialCurrency="EUR" />
+        <Button content="&#8693;" onClick={handleSwitch} modifier="switch" />
+        <SelectCurrency currencyType="currencyTo" initialCurrency="UAH" />
+      </div>
 
       <ResultContainer result={result} />
 

@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App__container">
+    <>
       <Header />
 
       <Routes>
@@ -31,7 +31,7 @@ function App() {
       </Routes>
 
       <Footer />
-    </div>
+    </>
   );
 }
 

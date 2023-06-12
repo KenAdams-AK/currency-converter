@@ -2,8 +2,7 @@
 @import "shared";
 @import "config";
 
-@import "./modules/App.scss";
-
+@import "./modules/Home.scss";
 @import "./modules/About.scss";
 
 @import "./modules/Header.scss";
@@ -11,7 +10,13 @@
 
 @import "./modules/NavBar.scss";
 
+@import "./modules/AmountInput.scss";
+@import "./modules/SelectCurrency.scss";
+@import "./modules/ResultContainer.scss";
+@import "./modules/RatesTable.scss";
+
 @import "./modules/Logo.scss";
+@import "./modules/Button.scss";
 @import "./modules/ThemeButton.scss";
 
 @import "./modules/LoaderFallback.scss";
