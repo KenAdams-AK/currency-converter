@@ -16,6 +16,9 @@ export default function Rates() {
   );
 
   useEffect(() => {
+    if (!ratesAmount) {
+      return undefined;
+    }
     const promise = dispatch(fetchLatestRates({ amount: ratesAmount, baseCurrency }));
 
     return () => promise.abort();
@@ -26,8 +29,8 @@ export default function Rates() {
       <LoaderFallback isLoading={isLoading} />
       <ErrorContainer error={error} />
 
-      <SelectCurrency currencyType="baseCurrency" baseCurrency={baseCurrency} />
-      <AmountInput amountType="ratesAmount" />
+      <SelectCurrency currencyType="baseCurrency" initialCurrency="EUR" />
+      <AmountInput amountType="ratesAmount" initialAmount="200" />
 
       {rates ? <RatesTable rates={rates} /> : null}
     </Main>

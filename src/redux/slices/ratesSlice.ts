@@ -3,7 +3,6 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { LatestRates, Rates } from "../../models/latestRates";
 import { apiRouts } from "../../routes/apiRouts";
-import { parseLocalStorageItem } from "../../helpers/parseLocalStorage";
 
 type InitialState = {
   isLoading: boolean;
@@ -17,8 +16,8 @@ const initialState: InitialState = {
   isLoading: false,
   error: "",
   rates: null,
-  baseCurrency: parseLocalStorageItem("baseCurrency", "EUR"),
-  ratesAmount: parseLocalStorageItem("ratesAmount", "100"),
+  baseCurrency: "",
+  ratesAmount: "",
 };
 
 export const fetchLatestRates = createAsyncThunk(
@@ -53,7 +52,6 @@ const ratesSlice = createSlice({
 
     builder.addCase(fetchLatestRates.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.baseCurrency = action.payload.base;
       state.rates = action.payload.rates;
     });
 

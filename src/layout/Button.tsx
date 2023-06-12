@@ -6,10 +6,10 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function Button(props: Props) {
-  const { content, onClick } = props;
+  const { content, onClick, ...rest } = props;
 
   return (
-    <button className="SwitchButton" type="button" onClick={onClick}>
+    <button className="SwitchButton" type="button" onClick={onClick} {...rest}>
       {content}
     </button>
   );

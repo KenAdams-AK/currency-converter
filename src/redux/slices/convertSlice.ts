@@ -1,7 +1,6 @@
 import axios from "axios";
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import { parseLocalStorageItem } from "../../helpers/parseLocalStorage";
 import { apiRouts } from "../../routes/apiRouts";
 import { ConvertCurrency } from "../../models/convertCurrency";
 
@@ -19,9 +18,9 @@ const initialState: InitialState = {
   isLoading: false,
   error: "",
   result: 0,
-  currencyFrom: parseLocalStorageItem("currencyFrom", "EUR"),
-  currencyTo: parseLocalStorageItem("currencyTo", "UAH"),
-  convertAmount: parseLocalStorageItem("convertAmount", "100"),
+  currencyFrom: "",
+  currencyTo: "",
+  convertAmount: "",
   isSwitching: false,
 };
 

@@ -1,4 +1,5 @@
-import { InputHTMLAttributes, useCallback, useEffect, useState } from "react";
+import debounce from "lodash.debounce";
+import { InputHTMLAttributes, useCallback, useEffect, useMemo } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 import { TTL } from "../constants/TimeToLive";
@@ -8,44 +9,40 @@ import { updateConvertAmount } from "../redux/slices/convertSlice";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   amountType: "convertAmount" | "ratesAmount";
+  initialAmount: string;
 }
 
 export default function AmountInput(props: Props) {
-  const { amountType } = props;
+  const { amountType, initialAmount, ...rest } = props;
 
   const dispatch = useAppDispatch();
-  const [amount, setAmount] = useLocalStorage(`${amountType}`, "100", TTL.amount);
-
-  const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
+  const [amount, setAmount] = useLocalStorage(`${amountType}`, `${initialAmount}`, TTL.amount);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setAmount(e.target.value);
   }, []);
 
-  function updateAmount() {
+  function updateAmount(value: string) {
     switch (amountType) {
       case "convertAmount":
-        dispatch(updateConvertAmount(amount));
+        dispatch(updateConvertAmount(value));
         break;
       case "ratesAmount":
-        dispatch(updateRatesAmount(amount));
+        dispatch(updateRatesAmount(value));
         break;
       default:
         break;
     }
   }
 
+  const debouncedUpdateAmount = useMemo(() => debounce(updateAmount, 800), []);
+
   useEffect(() => {
-    if (isFirstLoad) {
-      setIsFirstLoad(false);
-      return undefined;
+    if (amountType === "ratesAmount") {
+      debouncedUpdateAmount(amount);
+    } else {
+      updateAmount(amount);
     }
-
-    const timeoutId: ReturnType<typeof setTimeout> = setTimeout(() => {
-      updateAmount();
-    }, 800);
-
-    return () => clearTimeout(timeoutId);
   }, [amount]);
 
   return (
@@ -60,6 +57,7 @@ export default function AmountInput(props: Props) {
         maxLength={9}
         onChange={handleChange}
         required
+        {...rest}
       />
     </label>
   );

@@ -24,30 +24,32 @@ export default function Home() {
     dispatch(toggleSwitchCurrency(true));
   }, []);
 
-  // TODO: Fix bug: on initial rload set selected currecyFrom/currencyTo into UI
+  useEffect(() => {
+    if (!convertAmount) {
+      return undefined;
+    }
 
-  // useEffect(() => {
-  //   const promise = dispatch(
-  //     fetchConvertCurrency({ from: currencyFrom, to: currencyTo, amount: convertAmount }),
-  //   );
+    const promise = dispatch(
+      fetchConvertCurrency({ from: currencyFrom, to: currencyTo, amount: convertAmount }),
+    );
 
-  //   return () => promise.abort();
-  // }, []);
+    return () => promise.abort();
+  }, [currencyFrom, currencyTo]);
 
   return (
     <Main pageName="Home">
       <LoaderFallback isLoading={isLoading} />
       <ErrorContainer error={error} />
 
-      <AmountInput amountType="convertAmount" />
+      <AmountInput amountType="convertAmount" initialAmount="100" />
 
-      <SelectCurrency currencyType="currencyFrom" />
+      <SelectCurrency currencyType="currencyFrom" initialCurrency="EUR" />
       <Button content="Switch" onClick={handleSwitch} />
-      <SelectCurrency currencyType="currencyTo" />
+      <SelectCurrency currencyType="currencyTo" initialCurrency="UAH" />
 
       <ResultContainer result={result} />
 
-      <Button content="Convert" onClick={handleConvert} />
+      <Button content="Convert" onClick={handleConvert} disabled={!convertAmount.length} />
     </Main>
   );
 }

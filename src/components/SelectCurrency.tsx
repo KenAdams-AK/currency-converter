@@ -1,4 +1,4 @@
-import { SelectHTMLAttributes, useCallback, useEffect, useState } from "react";
+import { SelectHTMLAttributes, useCallback, useEffect } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 
@@ -12,11 +12,11 @@ import { TTL } from "../constants/TimeToLive";
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   currencyType: "currencyFrom" | "currencyTo" | "baseCurrency";
-  baseCurrency?: string;
+  initialCurrency: string;
 }
 
 export default function SelectCurrency(props: Props) {
-  const { currencyType, baseCurrency } = props;
+  const { currencyType, initialCurrency, ...rest } = props;
 
   const dispatch = useAppDispatch();
   const { currencySymbols } = useAppSelector((state) => state.currencySymbols);
@@ -26,56 +26,48 @@ export default function SelectCurrency(props: Props) {
 
   const [selectedCurrency, setSelectedCurrency] = useLocalStorage<string>(
     `${currencyType}`,
-    "",
+    `${initialCurrency}`,
     TTL.currency,
   );
-
-  const [isFirstLoad, setIsFirstLoad] = useState<boolean>(true);
 
   const handleSelect = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCurrency(e.target.value);
   }, []);
 
-  function updateCurrency() {
+  function updateCurrency(value: string) {
     switch (currencyType) {
       case "currencyFrom":
-        dispatch(updateCurrencyFrom(selectedCurrency));
+        dispatch(updateCurrencyFrom(value));
         break;
       case "currencyTo":
-        dispatch(updateCurrencyTo(selectedCurrency));
-        setSelectedCurrency(currencyFrom);
+        dispatch(updateCurrencyTo(value));
         break;
       case "baseCurrency":
-        dispatch(updateBaseCurrency(selectedCurrency));
+        dispatch(updateBaseCurrency(value));
         break;
       default:
         break;
     }
   }
 
-  function switchCurrency() {
+  function switchCurrency(to: string, from: string) {
     if (isSwitching) {
       if (currencyType === "currencyFrom") {
-        setSelectedCurrency(currencyTo);
+        setSelectedCurrency(to);
       }
       if (currencyType === "currencyTo") {
-        setSelectedCurrency(currencyFrom);
+        setSelectedCurrency(from);
       }
       dispatch(toggleSwitchCurrency(false));
     }
   }
 
   useEffect(() => {
-    if (isFirstLoad) {
-      setIsFirstLoad(false);
-      return;
-    }
-
-    updateCurrency();
+    updateCurrency(selectedCurrency);
   }, [selectedCurrency]);
 
   useEffect(() => {
-    switchCurrency();
+    switchCurrency(currencyTo, currencyFrom);
   }, [isSwitching]);
 
   return (
@@ -84,8 +76,9 @@ export default function SelectCurrency(props: Props) {
       <select
         className="SelectCurrency__select"
         id={currencyType}
-        value={selectedCurrency || baseCurrency}
+        value={selectedCurrency}
         onChange={handleSelect}
+        {...rest}
       >
         {currencySymbols.map((symbol) => (
           <option key={symbol} value={symbol}>
