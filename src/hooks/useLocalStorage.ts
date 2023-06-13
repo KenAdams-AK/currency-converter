@@ -8,7 +8,7 @@ export function useLocalStorage<T>(key: string, initialValue: T | (() => T), tim
       const item = JSON.parse(jsonValue);
       if (Date.now() > item.expiry) {
         localStorage.removeItem(key);
-        return null;
+        return initialValue;
       }
       return item.value;
     }
