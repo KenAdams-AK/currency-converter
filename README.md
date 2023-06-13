@@ -15,15 +15,15 @@ In the project directory, you can run:
 
 or
 
-### `pnpm instal` <br/>
+### `pnpm install` <br/>
 
-Instal All dependencies in this project
+to instal all dependencies in this project.
 
 ### `npm run dev`
 
-Runs the app in the development mode.<br />
+to run the app in the development mode.<br />
 Open [http://127.0.0.1:5173](http://127.0.0.1:5173) to view it in the browser.
 
 ### `npm run test`
 
-Runs the app tests.
+to run the app tests.
