@@ -51,7 +51,7 @@ export default function Home() {
 
       <ResultContainer result={result} />
 
-      <Button content="Convert" onClick={handleConvert} disabled={!convertAmount.length} />
+      <Button content="Convert" onClick={handleConvert} disabled={!convertAmount} />
     </Main>
   );
 }
