@@ -2,12 +2,8 @@ import { SelectHTMLAttributes, useCallback, useEffect } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import { useAppDispatch, useAppSelector } from "../redux/store";
 
-import { updateBaseCurrency } from "../redux/slices/ratesSlice";
-import {
-  updateCurrencyTo,
-  updateCurrencyFrom,
-  toggleSwitchCurrency,
-} from "../redux/slices/convertSlice";
+import { toggleSwitchCurrency } from "../redux/slices/convertSlice";
+import { updateCurrency } from "../helpers/updateCurrency";
 import { TTL } from "../constants/TimeToLive";
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
@@ -34,22 +30,6 @@ export default function SelectCurrency(props: Props) {
     setSelectedCurrency(e.target.value);
   }, []);
 
-  function updateCurrency(value: string) {
-    switch (currencyType) {
-      case "currencyFrom":
-        dispatch(updateCurrencyFrom(value));
-        break;
-      case "currencyTo":
-        dispatch(updateCurrencyTo(value));
-        break;
-      case "baseCurrency":
-        dispatch(updateBaseCurrency(value));
-        break;
-      default:
-        break;
-    }
-  }
-
   function switchCurrency(to: string, from: string) {
     if (isSwitching) {
       if (currencyType === "currencyFrom") {
@@ -63,7 +43,7 @@ export default function SelectCurrency(props: Props) {
   }
 
   useEffect(() => {
-    updateCurrency(selectedCurrency);
+    updateCurrency(currencyType, selectedCurrency, dispatch);
   }, [selectedCurrency]);
 
   useEffect(() => {

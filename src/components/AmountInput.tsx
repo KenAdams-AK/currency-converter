@@ -1,11 +1,10 @@
 import debounce from "lodash.debounce";
 import { InputHTMLAttributes, useCallback, useEffect, useMemo } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-
-import { TTL } from "../constants/TimeToLive";
 import { useAppDispatch } from "../redux/store";
-import { updateRatesAmount } from "../redux/slices/ratesSlice";
-import { updateConvertAmount } from "../redux/slices/convertSlice";
+
+import { updateAmount } from "../helpers/updateAmount";
+import { TTL } from "../constants/TimeToLive";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   amountType: "convertAmount" | "ratesAmount";
@@ -22,26 +21,13 @@ export default function AmountInput(props: Props) {
     setAmount(e.target.value);
   }, []);
 
-  function updateAmount(value: string) {
-    switch (amountType) {
-      case "convertAmount":
-        dispatch(updateConvertAmount(value));
-        break;
-      case "ratesAmount":
-        dispatch(updateRatesAmount(value));
-        break;
-      default:
-        break;
-    }
-  }
-
   const debouncedUpdateAmount = useMemo(() => debounce(updateAmount, 800), []);
 
   useEffect(() => {
     if (amountType === "ratesAmount") {
-      debouncedUpdateAmount(amount);
+      debouncedUpdateAmount(amountType, amount, dispatch);
     } else {
-      updateAmount(amount);
+      updateAmount(amountType, amount, dispatch);
     }
   }, [amount]);
 
