@@ -18,7 +18,14 @@ export default function AmountInput(props: Props) {
   const [amount, setAmount] = useLocalStorage(`${amountType}`, `${initialAmount}`, TTL.amount);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setAmount(e.target.value);
+    function isValid() {
+      const re = /^[0-9\b]+$/;
+      return e.target.value === "" || re.test(e.target.value);
+    }
+
+    if (isValid()) {
+      setAmount(e.target.value);
+    }
   }, []);
 
   const debouncedUpdateAmount = useMemo(() => debounce(updateAmount, 800), []);

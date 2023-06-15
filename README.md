@@ -1,6 +1,7 @@
 # Currency convertor application.
 
-This project was bootstrapped with [vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+This project was bootstrapped with [vite](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).<br/>
+Node version: `18.12.1`
 
 <ins>App Preview:</ins>
 ![Web](src/assets/app-preview-web.jpg)
